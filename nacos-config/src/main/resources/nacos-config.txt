@@ -1,0 +1,14 @@
+nacos-provider-dev.properties
+
+appName=nacos-provider-dev
+appVersion=1.0.0
+changed=true
+count=600
+
+
+nacos-config-public.properties
+
+appName=nacos-provider-public
+appVersion=1.0.0
+changed=true
+count=6666

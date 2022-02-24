@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {
+      "name": "chy.app.health",
+      "type": "org.chy.health.support.HealthProperties",
+      "sourceType": "org.chy.health.support.HealthProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "chy.app.health.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.chy.health.support.HealthProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "chy.app.health.response",
+      "type": "java.lang.String",
+      "sourceType": "org.chy.health.support.HealthProperties",
+      "defaultValue": "PONG"
+    }
+  ],
+  "hints": []
+}

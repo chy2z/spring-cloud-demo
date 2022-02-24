@@ -1,0 +1,35 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: nacos-sentinel-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:7070
+      filter:
+        enabled: true
+
+management:
+  endpoints:
+    web:
+     exposure:
+       include: "*"
+
+# 启用熔断
+feign:
+  circuitbreaker:
+    enabled: true
+  sentinel:
+    enabled: true
+
+# 启用SentinelRestTemplate
+resttemplate:
+  sentinel:
+    enabled: true
+

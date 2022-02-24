@@ -1,0 +1,17 @@
+# nacos 的配置必须写到 bootstrap.yml 里面，否则更新配置的时候获取不到配置信息
+# ${prefix}-${spring.profiles.active}.${file-extension}
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: c57939a7-9513-44fb-b13e-a2cf2df3be05
+        #username: nacos
+        #password: nacos
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: c57939a7-9513-44fb-b13e-a2cf2df3be05
+        file-extension: properties
+        group: DEFAULT_GROUP
+        #username: nacos
+        #password: nacos

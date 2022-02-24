@@ -1,0 +1,31 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: nacos-gateway
+  profiles:
+    active: public
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      loadbalancer:
+        use404: true
+      discovery:
+        locator:
+          enabled: false  #开放服务名访问方式
+          lower-case-service-id: true #服务名小写
+      routes:
+        - id: nacos-provider        #指定服务名
+          uri: lb://nacos-provider  #去注册中心找这个服务名
+          predicates:               #断言，匹配访问的路径
+            - Path=/getConfig/**    #服务访问路径： http://localhost:8082/getConfig/chy--->http://localhost:8080/getConfig/chy
+
+        - id: nacos-provider2
+          uri: lb://nacos-provider
+          predicates:
+            - Path=/nacos-provider/getConfig/**
+          filters:            #表示过滤1个路径,2表示俩个路径,以此类推
+            - StripPrefix=1   #服务访问路径：http://localhost:8082/nacos-provider/getConfig/chy--->http://localhost:8080/getConfig/chy
