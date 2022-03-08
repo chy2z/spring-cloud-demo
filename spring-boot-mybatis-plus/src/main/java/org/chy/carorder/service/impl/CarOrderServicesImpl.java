@@ -3,6 +3,7 @@ package org.chy.carorder.service.impl;
 
 import org.chy.carorder.dao.CarOrderDao;
 import org.chy.carorder.dto.req.CarOderSearchReqDto;
+import org.chy.carorder.dto.req.CarOrderAddReqDto;
 import org.chy.carorder.dto.resp.CarOderSearchRespDto;
 import org.chy.carorder.entity.CarOrderEntity;
 import org.chy.carorder.service.CarOrderServices;
@@ -39,5 +40,18 @@ public class CarOrderServicesImpl implements CarOrderServices {
     @Override
     public CarOderSearchRespDto search(CarOderSearchReqDto reqDto) {
         return carOrderDao.search(reqDto);
+    }
+
+    @Override
+    public List<CarOrderEntity> searchByCarNo(String carNo) {
+        return carOrderDao.searchByCarNo(carNo);
+    }
+
+    @Override
+    public boolean add(CarOrderAddReqDto reqDto) {
+        CarOrderEntity carOrderEntity=new CarOrderEntity();
+        carOrderEntity.setOrderNo(reqDto.getOrderNo());
+        carOrderEntity.setCarNo(reqDto.getCarNo());
+        return carOrderDao.add(carOrderEntity);
     }
 }

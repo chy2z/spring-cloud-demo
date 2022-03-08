@@ -1,6 +1,7 @@
 package org.chy.carorder.controller;
 
 import org.chy.carorder.dto.req.CarOderSearchReqDto;
+import org.chy.carorder.dto.req.CarOrderAddReqDto;
 import org.chy.carorder.dto.resp.CarOderSearchRespDto;
 import org.chy.carorder.entity.CarOrderEntity;
 import org.chy.carorder.entity.response.ResponseEntityDTO;
@@ -27,26 +28,43 @@ public class CarOrderController {
     private CarOrderServices carOrderServices;
 
     /**
-     * 测试获取配置
+     * 测试获取记录
      * http://localhost:8080/car/order/get
      *
      * @return
      */
     @GetMapping("get")
-    public ResponseEntityDTO<CarOrderEntity> getCarOrder() {
+    public ResponseEntityDTO<CarOrderEntity> get() {
         return ResponseEntityDTO.success(carOrderServices.selectByPrimaryKey(1));
     }
 
     /**
-     * 测试获取配置
+     * 测试获取全部记录
      * http://localhost:9090/car/order/getAll
      *
      * @return
      */
     @GetMapping("getAll")
-    public ResponseEntityDTO<List<CarOrderEntity>> getCarOrderAll() {
+    public ResponseEntityDTO<List<CarOrderEntity>> getAll() {
         List<CarOrderEntity> carOrderEntities = carOrderServices.selectAll();
         return ResponseEntityDTO.success(carOrderEntities);
+    }
+
+    /**
+     * 测试根据车牌获取记录走缓存
+     * http://localhost:9090/car/order/getCacheByCarNo
+     *
+     * @return
+     */
+    @GetMapping("getCacheByCarNo")
+    public ResponseEntityDTO<List<CarOrderEntity>> getCacheByCarNo(String carNo) {
+        List<CarOrderEntity> carOrderEntities = carOrderServices.searchByCarNo(carNo);
+        return ResponseEntityDTO.success(carOrderEntities);
+    }
+
+    @PostMapping("addCarOrder")
+    public ResponseEntityDTO<Boolean> addCarOrder(@RequestBody CarOrderAddReqDto reqDto) {
+        return ResponseEntityDTO.success( carOrderServices.add(reqDto));
     }
 
     /**

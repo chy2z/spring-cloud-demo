@@ -51,4 +51,23 @@ public class CarOrderDaoImpl extends
         result.setPageSize(page.getSize());
         return result;
     }
+
+    @Override
+    public List<CarOrderEntity> searchByCarNo(String carNo) {
+        LambdaQueryWrapper<CarOrderEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CarOrderEntity::getCarNo, carNo);
+        return super.baseMapper.selectList(wrapper);
+    }
+
+    @Override
+    public boolean add(CarOrderEntity entity) {
+        return super.baseMapper.insert(entity)>0;
+    }
+
+    @Override
+    public boolean delete(String carNo) {
+        LambdaQueryWrapper<CarOrderEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CarOrderEntity::getCarNo, carNo);
+        return super.baseMapper.delete(wrapper) > 0;
+    }
 }
