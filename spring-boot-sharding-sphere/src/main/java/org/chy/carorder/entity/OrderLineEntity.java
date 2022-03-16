@@ -11,10 +11,13 @@ import java.math.BigDecimal;
  * Created by chy on 2022/3/10.
  */
 @TableName("order_line")
-public class OrderLineEntiry  extends BaseEntity implements Serializable {
+public class OrderLineEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -3815878187350167456L;
-
-    @TableId(value = "id", type = IdType.AUTO)
+    /**
+     * 设置 IdType.AUTO 会自动生成 分布式id
+     * 设置 IdType.INPUT 需要自己生成分布式id
+     */
+    @TableId(value = "id", type = IdType.INPUT)
     private Long id;
 
     private Long orderId;

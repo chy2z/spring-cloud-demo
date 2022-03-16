@@ -17,7 +17,7 @@ spring:
        # 数据库访问配置, 使用druid数据源
        type: com.alibaba.druid.pool.DruidDataSource
        driver-class-name: com.mysql.cj.jdbc.Driver
-       url: jdbc:mysql://localhost:3306/spboot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+       url: jdbc:mysql://localhost:3306/spboot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
        username: root
        password: wmzycn
        # 连接池配置
@@ -61,16 +61,16 @@ spring:
           actual-data-nodes: ds0.order_line_$->{0..3}
           table-strategy:
               standard:
-                sharding-column: orderId
+                sharding-column: order_id
                 precise-algorithm-class-name: org.chy.carorder.config.sharding.DefaultPreciseShardingAlgorithm
           key-generator:
               column: id
               # 自定义分布式id
               type: TREND_INCREASING
       #关联表
-      binding-tables: order,order_line
+      binding-tables[0]: order,order_line
       #广播表
-      broadcast-tables: users,car_order
+      broadcast-tables[0]: users,car_order
 
 #mybatis配置
 mybatis:
