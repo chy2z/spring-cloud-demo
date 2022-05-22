@@ -1,0 +1,22 @@
+package org.chy.rules
+import org.chy.carorder.bo.OrderRuleBo
+import org.chy.carorder.rules.drools.OrderRuleAction
+dialect  "java"
+
+rule "order-rule-1"
+    no-loop true
+    when
+        $o : OrderRuleBo(count <= 100 && $o.getType().equals("租车"))
+    then
+         OrderRuleAction.doParse($o, drools.getRule());
+         System.out.println("订单数量<=100");
+end
+
+rule "order-rule-2"
+    no-loop true
+    when
+        $o : OrderRuleBo(count>100 &&  count <= 200 && $o.getType().equals("租车"))
+    then
+         OrderRuleAction.doParse($o, drools.getRule());
+         System.out.println("100<订单数量<=200");
+end

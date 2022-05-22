@@ -1,0 +1,23 @@
+package org.chy.rules
+import org.chy.carorder.bo.CouponsRuleBo
+import org.chy.carorder.rules.drools.CouponsRuleAction
+import org.chy.carorder.rules.drools.OrderRuleAction
+dialect  "java"
+
+rule "coupons-rule-1"
+    no-loop true
+    when
+        $o : CouponsRuleBo(money <= 200 && $o.getType().equals("消费券"))
+    then
+         CouponsRuleAction.doParse($o, drools.getRule());
+         System.out.println("劵金额<=100");
+end
+
+rule "coupons-rule-2"
+    no-loop true
+    when
+        $o : CouponsRuleBo(money>200 &&  money <= 500 && $o.getType().equals("消费券"))
+    then
+         CouponsRuleAction.doParse($o, drools.getRule());
+         System.out.println("200<劵金额<=500");
+end
