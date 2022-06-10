@@ -36,6 +36,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <spring-cloud.version>2020.0.3</spring-cloud.version>
     <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+    <org.mapstruct.version>1.4.0.Final</org.mapstruct.version>
   </properties>
 
   <dependencyManagement>
@@ -166,6 +167,13 @@
         <version>1.0-SNAPSHOT</version>
       </dependency>
 
+      <!-- 属性映射 -->
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${org.mapstruct.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -189,6 +197,16 @@
       <groupId>org.apache.directory.studio</groupId>
       <artifactId>org.apache.commons.codec</artifactId>
       <version>1.8</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.4.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version> 1.2.70</version>
     </dependency>
   </dependencies>
 
