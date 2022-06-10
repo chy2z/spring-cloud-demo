@@ -9,8 +9,8 @@ spring:
     allow-bean-definition-overriding: true
   shardingsphere:
     props:
-      sql:
-        show: true
+      sql.show: true
+      max.connections.size.per.query: 3
     datasource:
      names: ds0
      ds0:

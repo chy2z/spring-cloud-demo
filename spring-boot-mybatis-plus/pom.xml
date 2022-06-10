@@ -107,7 +107,17 @@
             <artifactId>spring-boot-platform-starter-controller-guard</artifactId>
         </dependency>
 
+        <!-- 属性映射 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
 
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -118,6 +128,8 @@
                 <includes>
                     <include>*.yml</include>
                     <include>**/*.xml</include>
+                    <include>**/*.factories</include>
+                    <include>**/*.json</include>
                     <include>${project.active}/**</include>
                 </includes>
                 <excludes>
@@ -129,10 +141,17 @@
            <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-compiler-plugin</artifactId>
-               <version>3.3</version>
+               <version>3.8.1</version>
                <configuration>
                    <source>1.8</source>
                    <target>1.8</target>
+                   <annotationProcessorPaths>
+                       <path>
+                           <groupId>org.mapstruct</groupId>
+                           <artifactId>mapstruct-processor</artifactId>
+                           <version>${org.mapstruct.version}</version>
+                       </path>
+                   </annotationProcessorPaths>
                </configuration>
            </plugin>
            <plugin>

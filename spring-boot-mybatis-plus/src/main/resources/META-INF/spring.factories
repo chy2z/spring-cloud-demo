@@ -1,0 +1,4 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+org.chy.carorder.config.AppConfigBootstrapConfiguration
+org.springframework.boot.env.PropertySourceLoader=\
+org.chy.carorder.config.propertysource.CusJsonPropertySourceLoader

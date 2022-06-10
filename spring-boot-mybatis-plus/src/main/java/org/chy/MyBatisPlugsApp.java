@@ -13,9 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("org.chy.carorder")
 @MapperScan("org.chy.carorder.mapper")
 public class MyBatisPlugsApp {
-
     public static void main(String[] args) {
         SpringApplication.run(MyBatisPlugsApp.class, args);
     }
-
 }

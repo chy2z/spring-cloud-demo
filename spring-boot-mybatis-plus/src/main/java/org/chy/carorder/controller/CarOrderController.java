@@ -10,8 +10,10 @@ import org.chy.carorder.sys.interceptor.ForbidDuplicateSubmit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,8 +26,23 @@ import java.util.List;
 public class CarOrderController {
     private final static Logger LOGGER = LoggerFactory.getLogger(CarOrderController.class);
 
+    @Value("${application.property.message}")
+    private String appMmessage;
+
     @Autowired
     private CarOrderServices carOrderServices;
+
+    /**
+     * 测试获取记录
+     * http://localhost:8080/car/order/get/message
+     *
+     * @return
+     */
+    @GetMapping("get/message")
+    public ResponseEntityDTO<List<String>> getMessage() {
+        LOGGER.info(appMmessage);
+        return ResponseEntityDTO.success(Arrays.asList(appMmessage));
+    }
 
     /**
      * 测试获取记录
