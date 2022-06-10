@@ -1,5 +1,6 @@
 package org.chy.carorder.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.chy.carorder.rules.util.KieUtils;
 import org.chy.carorder.service.OrderRulesReloadServices;
 import org.kie.api.builder.KieBuilder;
@@ -23,11 +24,16 @@ import java.io.IOException;
 public class OrderRulesReloadServicesImpl implements OrderRulesReloadServices {
     private final static Logger LOGGER = LoggerFactory.getLogger(OrderRulesReloadServicesImpl.class);
 
+    /**
+     * 清理原来所有规则，重新写入新规则
+     * @param drlName
+     * @throws Exception
+     */
     @Override
     public void reload(String drlName) throws Exception {
         KieFileSystem kfs = KieUtils.getKieServices().newKieFileSystem();
-        //loadDBRules(drlName, kfs);
-        loadFileRules(drlName, kfs);
+        loadDBRules(drlName, kfs);
+        //loadFileRules(drlName, kfs);
         KieBuilder kieBuilder = KieUtils.getKieServices().newKieBuilder(kfs).buildAll();
         Results results = kieBuilder.getResults();
         if (results.hasMessages(Message.Level.ERROR)) {
@@ -40,15 +46,41 @@ public class OrderRulesReloadServicesImpl implements OrderRulesReloadServices {
     }
 
     /**
-     * 从数据库加载规则
+     * 模拟从数据库加载规则
      * @param drlName
      * @param kfs
      */
     private void loadDBRules(String drlName, KieFileSystem kfs) {
-        // "src/main/resources/rules/address.drl";
-        String path = "src/main/resources/"+ KieUtils.RULES_PATH + "/"+ drlName + ".drl";
+        if (StringUtils.isBlank(drlName)) {
+            drlName = "order";
+        }
+        // 模拟重写规则
+        String path = "src/main/resources/" + KieUtils.RULES_PATH + "/" + drlName + ".drl";
+        // 数据库内容
+        String dbContent = "package org.chy.rules\n" +
+                "import org.chy.carorder.bo.OrderRuleBo\n" +
+                "import org.chy.carorder.rules.drools.OrderRuleAction\n" +
+                "dialect  \"java\"\n" +
+                "\n" +
+                "rule \"order-rule-5\"\n" +
+                "    no-loop true\n" +
+                "    when\n" +
+                "        $o : OrderRuleBo(count <= 1000 && $o.getType().equals(\"租车\"))\n" +
+                "    then\n" +
+                "         OrderRuleAction.doParse($o, drools.getRule());\n" +
+                "         System.out.println(\"订单数量<=1000\");\n" +
+                "end\n" +
+                "\n" +
+                "rule \"order-rule-6\"\n" +
+                "    no-loop true\n" +
+                "    when\n" +
+                "        $o : OrderRuleBo(count>1000 &&  count <= 2000 && $o.getType().equals(\"租车\"))\n" +
+                "    then\n" +
+                "         OrderRuleAction.doParse($o, drools.getRule());\n" +
+                "         System.out.println(\"1000<订单数量<=2000\");\n" +
+                "end";
         // 模拟从数据库加载的规则
-        kfs.write(path, "package plausibcheck.adress\n\n import com.neo.drools.model.Address;\n import com.neo.drools.model.fact.AddressCheckResult;\n\n rule \"Postcode 6 numbers\"\n\n    when\n  then\n        System.out.println(\"打印日志：更新rules成功!\");\n end");
+        kfs.write(path, dbContent);
     }
 
     /**
