@@ -172,7 +172,7 @@ public class SpringElExpression {
         CarOrderEntity carOrderEntity=new CarOrderEntity();
         carOrderEntity.setOrderNo("8888");
         try {
-            ExpressionParser ApplicationContext  = new SpelExpressionParser();
+            ExpressionParser expressionParser = new SpelExpressionParser();
             EvaluationContext evaluationContext = new StandardEvaluationContext();
             evaluationContext.setVariable("model",carOrderEntity);
             evaluationContext.setVariable("conditions","9999");
