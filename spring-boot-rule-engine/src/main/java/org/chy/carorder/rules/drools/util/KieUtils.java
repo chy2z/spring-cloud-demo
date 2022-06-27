@@ -1,4 +1,4 @@
-package org.chy.carorder.rules.util;
+package org.chy.carorder.rules.drools.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.kie.api.KieBase;
