@@ -3,6 +3,7 @@ package org.chy.carorder.service;
 import org.chy.carorder.config.RedissonCacheConfig;
 import org.chy.carorder.dto.req.CarOderSearchReqDto;
 import org.chy.carorder.dto.req.CarOrderAddReqDto;
+import org.chy.carorder.dto.req.CarOrderSubmitReqDto;
 import org.chy.carorder.dto.resp.CarOderSearchRespDto;
 import org.chy.carorder.entity.CarOrderEntity;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,4 +25,6 @@ public interface CarOrderServices {
     CarOderSearchRespDto search(CarOderSearchReqDto reqDto);
 
     boolean add(CarOrderAddReqDto reqDto);
+
+    Long submit(CarOrderSubmitReqDto reqDto);
 }

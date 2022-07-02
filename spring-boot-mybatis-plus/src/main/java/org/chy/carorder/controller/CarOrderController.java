@@ -2,6 +2,7 @@ package org.chy.carorder.controller;
 
 import org.chy.carorder.dto.req.CarOderSearchReqDto;
 import org.chy.carorder.dto.req.CarOrderAddReqDto;
+import org.chy.carorder.dto.req.CarOrderSubmitReqDto;
 import org.chy.carorder.dto.resp.CarOderSearchRespDto;
 import org.chy.carorder.entity.CarOrderEntity;
 import org.chy.carorder.entity.response.ResponseEntityDTO;
@@ -107,5 +108,17 @@ public class CarOrderController {
     public ResponseEntityDTO<CarOderSearchRespDto> search(@RequestBody CarOderSearchReqDto reqDto) {
         CarOderSearchRespDto carOrderEntities = carOrderServices.search(reqDto);
         return ResponseEntityDTO.success(carOrderEntities);
+    }
+
+    /**
+     * 测试提交订单
+     * http://localhost:8080/car/order/submit
+     *
+     * @return
+     */
+    @PostMapping("submit")
+    public ResponseEntityDTO<Long> submit(@RequestBody CarOrderSubmitReqDto reqDto) {
+        Long id = carOrderServices.submit(reqDto);
+        return ResponseEntityDTO.success(id);
     }
 }

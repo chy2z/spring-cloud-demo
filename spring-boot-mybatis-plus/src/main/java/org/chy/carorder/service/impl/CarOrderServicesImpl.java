@@ -1,12 +1,15 @@
 package org.chy.carorder.service.impl;
 
 
+import org.chy.carorder.constant.SubmitTypeEnum;
 import org.chy.carorder.dao.CarOrderDao;
 import org.chy.carorder.dto.req.CarOderSearchReqDto;
 import org.chy.carorder.dto.req.CarOrderAddReqDto;
+import org.chy.carorder.dto.req.CarOrderSubmitReqDto;
 import org.chy.carorder.dto.resp.CarOderSearchRespDto;
 import org.chy.carorder.entity.CarOrderEntity;
 import org.chy.carorder.service.CarOrderServices;
+import org.chy.carorder.service.factory.CarOrderSubmitFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,9 @@ import java.util.List;
 public class CarOrderServicesImpl implements CarOrderServices {
     @Autowired
     CarOrderDao carOrderDao;
+
+    @Autowired
+    CarOrderSubmitFactory carOrderSubmitFactory;
 
     @Override
     public CarOrderEntity selectByPrimaryKey(Integer id) {
@@ -53,5 +59,10 @@ public class CarOrderServicesImpl implements CarOrderServices {
         carOrderEntity.setOrderNo(reqDto.getOrderNo());
         carOrderEntity.setCarNo(reqDto.getCarNo());
         return carOrderDao.add(carOrderEntity);
+    }
+
+    @Override
+    public Long submit(CarOrderSubmitReqDto reqDto) {
+        return carOrderSubmitFactory.getBean(SubmitTypeEnum.get(reqDto.getSubmitType())).submit(reqDto);
     }
 }
