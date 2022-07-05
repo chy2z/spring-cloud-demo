@@ -11,6 +11,8 @@ import org.chy.carorder.dto.resp.CarOderSearchRespDto;
 import org.chy.carorder.entity.CarOrderEntity;
 import org.chy.carorder.mapper.ext.CarOrderMapperExt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -62,6 +64,26 @@ public class CarOrderDaoImpl extends
     @Override
     public boolean add(CarOrderEntity entity) {
         return super.baseMapper.insert(entity)>0;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = {Exception.class,RuntimeException.class})
+    public boolean updateStockById(Integer id, Integer stockCount) {
+        CarOrderEntity carOrderEntity = new CarOrderEntity();
+        carOrderEntity.setStockCount(stockCount);
+        LambdaQueryWrapper<CarOrderEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CarOrderEntity::getId, id);
+        return super.baseMapper.update(carOrderEntity, wrapper) > 0;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = {Exception.class,RuntimeException.class})
+    public boolean updateStockByCarNo(String carNo, Integer stockCount) {
+        CarOrderEntity carOrderEntity = new CarOrderEntity();
+        carOrderEntity.setStockCount(stockCount);
+        LambdaQueryWrapper<CarOrderEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CarOrderEntity::getCarNo, carNo);
+        return super.baseMapper.update(carOrderEntity, wrapper) > 0;
     }
 
     @Override

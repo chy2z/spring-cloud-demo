@@ -19,7 +19,7 @@ public class CarOrderEntity implements Serializable {
     private static final long serialVersionUID = -5007155473903409598L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @TableField(value = "carNo")
     private String carNo;
@@ -27,11 +27,14 @@ public class CarOrderEntity implements Serializable {
     @TableField(value = "orderNo")
     private String orderNo;
 
-    public Long getId() {
+    @TableField(value = "stockCount")
+    private Integer stockCount;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,5 +52,13 @@ public class CarOrderEntity implements Serializable {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
     }
 }

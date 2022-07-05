@@ -26,5 +26,5 @@ public interface CarOrderServices {
 
     boolean add(CarOrderAddReqDto reqDto);
 
-    Long submit(CarOrderSubmitReqDto reqDto);
+    Integer submit(CarOrderSubmitReqDto reqDto);
 }

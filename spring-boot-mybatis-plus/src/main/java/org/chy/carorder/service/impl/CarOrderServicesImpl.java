@@ -62,7 +62,7 @@ public class CarOrderServicesImpl implements CarOrderServices {
     }
 
     @Override
-    public Long submit(CarOrderSubmitReqDto reqDto) {
+    public Integer submit(CarOrderSubmitReqDto reqDto) {
         return carOrderSubmitFactory.getBean(SubmitTypeEnum.get(reqDto.getSubmitType())).submit(reqDto);
     }
 }

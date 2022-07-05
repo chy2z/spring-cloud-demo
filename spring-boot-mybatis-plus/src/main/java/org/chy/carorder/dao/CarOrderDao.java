@@ -49,6 +49,22 @@ public interface CarOrderDao extends IService<CarOrderEntity> {
     boolean add(CarOrderEntity entity);
 
     /**
+     * 更新库存数量
+     * @param id
+     * @param stockCount
+     * @return
+     */
+    boolean updateStockById(Integer id, Integer stockCount);
+
+    /**
+     * 更新库存数量
+     * @param id
+     * @param stockCount
+     * @return
+     */
+    boolean updateStockByCarNo(String carNo, Integer stockCount);
+
+    /**
      * 删除
      *
      * 删除记录也会删除缓存

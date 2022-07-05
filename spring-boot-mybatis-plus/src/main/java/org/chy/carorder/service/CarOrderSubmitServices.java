@@ -2,6 +2,7 @@ package org.chy.carorder.service;
 
 import org.chy.carorder.constant.SubmitTypeEnum;
 import org.chy.carorder.dto.req.CarOrderSubmitReqDto;
+import org.chy.carorder.entity.CarOrderEntity;
 
 /**
  * @author chy
@@ -15,7 +16,15 @@ public interface CarOrderSubmitServices {
       * @param reqDto
       * @return
       */
-     Long submit(CarOrderSubmitReqDto reqDto);
+     Integer submit(CarOrderSubmitReqDto reqDto);
+
+     /**
+      * 更新库存
+      * @param id
+      * @param stock
+      */
+     void updateStock(CarOrderEntity carOrderEntity, Integer stock);
+
 
      /**
       * 获取提交类型
