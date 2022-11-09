@@ -3,7 +3,7 @@ package org.chy.carorder.controller;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import org.chy.services.NacosProviderFeignService;
+import org.chy.services.NacosProviderFeignClientApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class ConsumerController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private NacosProviderFeignService nacosProviderFeignService;
+    private NacosProviderFeignClientApi nacosProviderFeignClientApi;
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -99,7 +99,7 @@ public class ConsumerController {
      */
     @GetMapping("/feign-version")
     public String version() {
-        return nacosProviderFeignService.version();
+        return nacosProviderFeignClientApi.version();
     }
 
     /**
@@ -110,7 +110,7 @@ public class ConsumerController {
      */
     @GetMapping("/feign-fetchConfig/{str}")
     public String fetchConfig(@PathVariable String str) {
-        return nacosProviderFeignService.fetchConfig(str);
+        return nacosProviderFeignClientApi.fetchConfig(str);
     }
 
     /**

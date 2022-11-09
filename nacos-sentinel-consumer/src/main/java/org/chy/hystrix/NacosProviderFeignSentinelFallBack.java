@@ -1,6 +1,6 @@
 package org.chy.hystrix;
 
-import org.chy.services.NacosProviderFeignService;
+import org.chy.services.NacosProviderFeignClientApi;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Created by chy on 2021/7/16.
  */
 @Component
-public class NacosProviderFeignSentinelFallBack implements NacosProviderFeignService {
+public class NacosProviderFeignSentinelFallBack implements NacosProviderFeignClientApi {
 
     @Override
     public String fetchConfig(String str) {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Component
 @FeignClient(name = "nacos-provider",fallback = NacosProviderFeignSentinelFallBack.class)
-public interface NacosProviderFeignService {
+public interface NacosProviderFeignClientApi {
 
     @GetMapping("/getConfig/{msg}")
     String fetchConfig(@PathVariable("msg") String msg);
