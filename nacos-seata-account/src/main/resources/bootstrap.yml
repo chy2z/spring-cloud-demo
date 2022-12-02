@@ -1,0 +1,12 @@
+# 加载顺序  bootstrap.yml ---> bootstrap-{profiles}.yml--> application.yml---> application-{profiles}.yml
+# nacos 的配置必须写到 bootstrap.yml 里面，否则更新配置的时候获取不到配置信息
+# ${spring.application.name}-${spring.profiles.active}.${file-extension}
+# nacos-seata-account-public.properties
+spring:
+  application:
+    name: nacos-seata-account
+  profiles:
+    active: public
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
