@@ -36,6 +36,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <spring-cloud.version>2020.0.3</spring-cloud.version>
     <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+    <seata-spring-boot-starter.version>1.5.2</seata-spring-boot-starter.version>
     <org.mapstruct.version>1.4.0.Final</org.mapstruct.version>
   </properties>
 
@@ -172,6 +173,24 @@
         <groupId>org.mapstruct</groupId>
         <artifactId>mapstruct</artifactId>
         <version>${org.mapstruct.version}</version>
+      </dependency>
+
+      <!--seata-->
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        <version>${spring-cloud-alibaba.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>io.seata</groupId>
+        <artifactId>seata-spring-boot-starter</artifactId>
+        <version>${seata-spring-boot-starter.version}</version>
       </dependency>
 
     </dependencies>
