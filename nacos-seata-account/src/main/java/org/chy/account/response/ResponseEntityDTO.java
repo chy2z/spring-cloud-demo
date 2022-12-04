@@ -8,7 +8,7 @@ import java.util.Objects;
  * Created by chy on 2021/11/16.
  */
 public class ResponseEntityDTO<T> implements Serializable {
-    private static final long serialVersionUID = -8567541939288898127L;
+    private static final long serialVersionUID = 3035640217960587862L;
     // 返回数据
     private T data;
     private String message;

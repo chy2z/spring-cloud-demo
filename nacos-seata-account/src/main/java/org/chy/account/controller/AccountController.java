@@ -17,7 +17,6 @@ import java.math.BigDecimal;
  * @date 2021/7/14
  */
 @RestController
-@RequestMapping("/")
 @RefreshScope
 public class AccountController {
     private final static Logger logger = LoggerFactory.getLogger(AccountController.class);
@@ -32,7 +31,7 @@ public class AccountController {
      * http://127.0.0.1:8080/getNacosConfig
      * @return
      */
-    @GetMapping(value = "/getNacosConfig")
+    @GetMapping(value = "/account/getNacosConfig")
     public String getNacosConfig() {
         return appConfig.toString();
     }
@@ -43,7 +42,7 @@ public class AccountController {
      *
      * @return
      */
-    @GetMapping("/version")
+    @GetMapping("/account/version")
     public String getVersion() {
         return "vesion:1.0.0" ;
     }
@@ -51,14 +50,14 @@ public class AccountController {
     /**
      * 减少金额
      *
-     * http://127.0.0.1:8080/reduce?userId=1001&orderMoney=1.0
+     * http://127.0.0.1:8080/reduce?userId=1001&money=1.0
      *
-     * @param userId
-     * @param orderMoney
-     * @return
+     * @param userId 用户id
+     * @param money 金额
+     * @return 结果
      */
-    @PostMapping("/reduce")
-    public ResponseEntityDTO<Boolean> reduce(@RequestParam String userId, @RequestParam BigDecimal orderMoney) {
-        return ResponseEntityDTO.success(accountService.reduce(userId, orderMoney));
+    @PostMapping("/account/reduce")
+    public ResponseEntityDTO<Boolean> reduce(@RequestParam String userId, @RequestParam BigDecimal money) {
+        return ResponseEntityDTO.success(accountService.reduce(userId, money));
     }
 }

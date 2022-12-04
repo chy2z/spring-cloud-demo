@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -34,17 +35,25 @@ public class AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
+
+    /**
+     * 减少金额
+     *
+     * @param userId 用户id
+     * @param money 用户金额
+     * @return 结果
+     */
     @GlobalTransactional(rollbackFor = Exception.class)
-    public Boolean reduce(String userId, BigDecimal num) {
-        LOGGER.info("account-service------->中扣减金额开始");
-        LOGGER.info("account-service------->全局事务id：{}", RootContext.getXID());
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean reduce(String userId, BigDecimal money) {
+        LOGGER.info("account-service------->中扣减金额开始,全局事务id:{}", RootContext.getXID());
         AccountEntity account = accountMapper.selectByUserId(userId);
-        account.setMoney(account.getMoney().subtract(num));
+        account.setMoney(account.getMoney().subtract(money));
         accountMapper.reduce(account);
         if (ERROR_USER_ID.equals(userId)) {
             throw new RuntimeException("account branch exception");
         }
-        LOGGER.info("account-service------->中扣减金额结束");
+        LOGGER.info("account-service------->中扣减金额结束,全局事务id:{}", RootContext.getXID());
         return true;
     }
 }
