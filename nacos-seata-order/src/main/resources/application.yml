@@ -1,0 +1,6 @@
+# 加载顺序  bootstrap.yml ---> bootstrap-{profiles}.yml--> application.yml---> application-{profiles}.yml
+management:
+  endpoints:
+    web:
+     exposure:
+       include: "*"

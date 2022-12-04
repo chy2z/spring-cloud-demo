@@ -1,0 +1,49 @@
+# nacos 的配置必须写到 bootstrap.yml 里面，否则更新配置的时候获取不到配置信息
+# ${spring.application.name}-${spring.profiles.active}.${file-extension}
+# nacos-seata-account-public.properties
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: seata
+        group: SEATA_GROUP
+        #username: nacos
+        #password: nacos
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: seata
+        file-extension: properties
+        group: SEATA_GROUP
+        #username: nacos
+        #password: nacos
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  # 自定义分布式事务服务群组，该值必须与 Nacos 配置中的 service.vgroupMapping.{my-service-group}=default 中的 {my-service-group}相同
+  tx-service-group: order_tx_group
+  service:
+    vgroup-mapping:
+      # 自定义分布式事务服务群组，该值必须与 Nacos 配置中的 service.vgroupMapping.{my-service-group}=default 中的 {my-service-group}相同
+      order_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: seata
+      #username: nacos
+      #password: nacos
+      data-id: seataServer.properties
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: seata
+      #username: nacos
+      #password: nacos
