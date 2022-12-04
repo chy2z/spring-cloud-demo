@@ -28,7 +28,13 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @FeignClient(name = "nacos-seata-stock")
 public interface StockFeignClient {
-
-    @PostMapping("stock/deduct")
-    ResponseEntityDTO<Boolean> deduct(@RequestParam("commodityCode") String commodityCode, @RequestParam("count") Integer count);
+    /**
+     * 减少库存
+     *
+     * @param commodityCode 商品编码
+     * @param count 数量
+     * @return 结果
+     */
+    @PostMapping("/stock/reduce")
+    ResponseEntityDTO<Boolean> reduce(@RequestParam("commodityCode") String commodityCode, @RequestParam("count") Integer count);
 }

@@ -51,7 +51,7 @@ public class OrderService {
         order.setCount(count);
         order.setMoney(orderMoney);
         orderMapper.insert(order);
-        //stockFeignClient.deduct(commodityCode, count);
+        stockFeignClient.reduce(commodityCode, count);
         accountFeignClient.reduce(userId, orderMoney);
         LOGGER.info("order-service------->创建订单结束,全局事务id:{}", RootContext.getXID());
         return true;

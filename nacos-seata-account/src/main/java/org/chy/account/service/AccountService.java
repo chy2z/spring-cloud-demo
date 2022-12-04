@@ -51,7 +51,7 @@ public class AccountService {
         account.setMoney(account.getMoney().subtract(money));
         accountMapper.reduce(account);
         if (ERROR_USER_ID.equals(userId)) {
-            throw new RuntimeException("account branch exception");
+            throw new RuntimeException("simulated exception:account branch exception");
         }
         LOGGER.info("account-service------->中扣减金额结束,全局事务id:{}", RootContext.getXID());
         return true;

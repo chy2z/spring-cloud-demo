@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.chy.stock.repository.StockMapper">
+    <resultMap id="BaseResultMap" type="org.chy.stock.model.StockEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="commodity_code" property="commodityCode" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectByCommodityCode" resultType="org.chy.stock.model.StockEntity">
+        select id, commodity_code, count
+        from stock_tbl
+        WHERE commodity_code = #{commodityCode}
+    </select>
+
+    <update id="reduce" parameterType="org.chy.stock.model.StockEntity">
+        update stock_tbl
+        set count = #{count,jdbcType=INTEGER}
+        where commodity_code = #{commodityCode}
+    </update>
+</mapper>
