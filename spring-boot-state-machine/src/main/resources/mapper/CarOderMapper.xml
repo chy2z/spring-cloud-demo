@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.chy.carorder.mapper.ext.CarOrderMapperExt">
+
+    <select id="search" resultType="org.chy.carorder.entity.CarOrderEntity" parameterType="org.chy.carorder.bo.CarOderSearchBo">
+        select t.id,t.carNo,t.orderNo
+        from car_order t
+        where 1=1
+        <if test="query.id!=null and query.id !='' ">
+            and t.id = #{query.id}
+        </if>
+        <if test="query.carNo!=null and query.carNo !='' ">
+            and t.carNo LIKE concat('%',#{query.carNo},'%')
+        </if>
+        <if test="query.orderNo!=null and query.orderNo !='' ">
+            and t.orderNo = #{query.orderNo}
+        </if>
+        order by t.id desc
+    </select>
+
+</mapper>

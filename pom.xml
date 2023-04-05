@@ -193,6 +193,13 @@
         <version>${seata-spring-boot-starter.version}</version>
       </dependency>
 
+      <!-- 状态机 squirrel-foundation -->
+      <dependency>
+        <groupId>org.squirrelframework</groupId>
+        <artifactId>squirrel-foundation</artifactId>
+        <version>0.3.8</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
