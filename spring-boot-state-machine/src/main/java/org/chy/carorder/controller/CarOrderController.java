@@ -85,7 +85,9 @@ public class CarOrderController {
                     MyOrderStateEventEnum.class, MyStateMachineContext.class);
 
         /**
-         * 条件为：content.getDel 为0的时候转换，并执行defaultHandle()方法
+         * 条件为：
+         * 当触发事件类型为MyOrderStateEventEnum.FROM_10_TO_20时
+         * 并且content.getDel为0的时候转换状态，并执行defaultHandle()方法
          */
         builder.externalTransition().from(MyOrderStateEnum.WAIT_CONFIRMING)
             .to(MyOrderStateEnum.WAIT_ENTERING).on(MyOrderStateEventEnum.FROM_10_TO_20)
@@ -99,7 +101,7 @@ public class CarOrderController {
         System.out.println("currentState is " + machine.getCurrentState());
         MyStateMachineContext context = new MyStateMachineContext();
         context.setDel(0);
-        machine.fire(MyOrderStateEventEnum.FROM_20_TO_30, context);
+        machine.fire(MyOrderStateEventEnum.FROM_10_TO_20, context);
         System.out.println("currentState is " + machine.getCurrentState());
         return ResponseEntityDTO.success(true);
     }
