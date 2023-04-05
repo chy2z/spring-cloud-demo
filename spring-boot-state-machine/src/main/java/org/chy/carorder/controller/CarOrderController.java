@@ -86,6 +86,7 @@ public class CarOrderController {
 
         /**
          * 条件为：
+         *
          * 当触发事件类型为MyOrderStateEventEnum.FROM_10_TO_20时
          * 并且content.getDel为0的时候转换状态，并执行defaultHandle()方法
          */
