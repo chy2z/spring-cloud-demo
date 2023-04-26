@@ -96,12 +96,16 @@ public class CarOrderController {
                 "myCondition:::(context!=null && context.getDel()!=null && context.getDel().equals(0))")
             .callMethod("defaultHandle");
 
+        // 创建状态机
         SquirrelFoundationStateMachine machine = (SquirrelFoundationStateMachine) builder
             .newStateMachine(MyOrderStateEnum.WAIT_CONFIRMING);
+
         machine.start();
+
         System.out.println("currentState is " + machine.getCurrentState());
         MyStateMachineContext context = new MyStateMachineContext();
         context.setDel(0);
+        // 触发状态事件
         machine.fire(MyOrderStateEventEnum.FROM_10_TO_20, context);
         System.out.println("currentState is " + machine.getCurrentState());
         return ResponseEntityDTO.success(true);
