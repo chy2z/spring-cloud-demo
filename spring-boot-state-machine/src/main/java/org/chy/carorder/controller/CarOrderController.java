@@ -9,6 +9,7 @@ import org.chy.carorder.statemachine.MyOrderStateEnum;
 import org.chy.carorder.statemachine.MyOrderStateEventEnum;
 import org.chy.carorder.statemachine.MyStateMachineContext;
 import org.chy.carorder.statemachine.squirrelfoundation.SquirrelFoundationStateMachine;
+import org.chy.carorder.statemachine.squirrelfoundation.SquirrelFoundationStateMachineDeclarativeListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,10 @@ public class CarOrderController {
         return ResponseEntityDTO.success(carOrderEntities);
     }
 
+    /**
+     * http://localhost:9090/car/order/changeState
+     * @return
+     */
     @GetMapping("changeState")
     public ResponseEntityDTO<Boolean> changeState() {
         StateMachineBuilder builder =
@@ -99,7 +104,7 @@ public class CarOrderController {
         // 创建状态机
         SquirrelFoundationStateMachine machine = (SquirrelFoundationStateMachine) builder
             .newStateMachine(MyOrderStateEnum.WAIT_CONFIRMING);
-
+        machine.addDeclarativeListener(new SquirrelFoundationStateMachineDeclarativeListener());
         machine.start();
 
         System.out.println("currentState is " + machine.getCurrentState());
